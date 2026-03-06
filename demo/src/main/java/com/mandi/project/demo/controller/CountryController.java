@@ -2,6 +2,7 @@ package com.mandi.project.demo.controller;
 
 import com.mandi.project.demo.dto.CountryResponse;
 import com.mandi.project.demo.service.CountryService;
+import com.mandi.project.demo.service.CountryServiceImpl;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,14 +15,15 @@ import java.util.List;
 @RequestMapping("/api/countries")
 public class CountryController {
 
-    private final CountryService countryService;
+    private final CountryServiceImpl countryServiceImpl;
 
-    public CountryController(CountryService countryService) {
-        this.countryService = countryService;
+    public CountryController(CountryServiceImpl countryServiceImpl) {
+        this.countryServiceImpl = countryServiceImpl;
     }
+
 
     @GetMapping
     public List<CountryResponse> getAllCountries() {
-        return countryService.getAllCountries();
+        return countryServiceImpl.getAllCountries();
     }
 }

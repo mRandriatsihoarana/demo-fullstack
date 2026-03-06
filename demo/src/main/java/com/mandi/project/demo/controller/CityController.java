@@ -4,16 +4,17 @@ import com.mandi.project.demo.dto.CityDetailsResponse;
 import com.mandi.project.demo.dto.CityResponse;
 import com.mandi.project.demo.dto.PageResponse;
 import com.mandi.project.demo.service.CityService;
+import com.mandi.project.demo.service.CityServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api")
 public class CityController {
-    private final CityService cityService;
+    private final CityServiceImpl cityServiceImpl;
 
-    public CityController(CityService cityService) {
-        this.cityService = cityService;
+    public CityController(CityServiceImpl cityServiceImpl) {
+        this.cityServiceImpl = cityServiceImpl;
     }
 
     @GetMapping("/countries/{countryId}/cities")
@@ -22,11 +23,11 @@ public class CityController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size
     ) {
-        return cityService.getCitiesByCountry(countryId, page, size);
+        return cityServiceImpl.getCitiesByCountry(countryId, page, size);
     }
 
     @GetMapping("/cities/{cityId}")
     public CityDetailsResponse getCityDetails(@PathVariable Long cityId) {
-        return cityService.getCityDetails(cityId);
+        return cityServiceImpl.getCityDetails(cityId);
     }
 }
